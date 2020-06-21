@@ -1,0 +1,2 @@
+# InitializableTypes
+Some basic type definitions to annotate that a type is uninitialized or intiailized. The use case if for situations where not all field of some data type are known at instantiation and must be filled in at a much later point in the code. By annotating the types as 'Initialized' or 'Uninitialized', one makes clear the status of the fields and help avoid accidental use of default values.
