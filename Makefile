@@ -9,3 +9,6 @@ example: example.cpp
 
 test: tests/test.cpp
 	g++ -o test $(CFLAGS) tests/test.cpp $(LDFLAGS)
+
+clean:
+	rm test example

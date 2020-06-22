@@ -2,6 +2,7 @@
 #define _INITIALIZABLE_H_
 #include <variant>
 #include <optional>
+#include <type_traits>
 
 /*****************************************************************
     These define the type templates for the initializable type
@@ -23,6 +24,8 @@ template <class Inner>
 struct InitializableStruct<Initialized, Inner>{
     Inner value;
     void operator = (const Inner val){value=val;};
+    InitializableStruct(Inner value): value(value){};
+    
 };
 
 // The actual type definition for an initializable variable
@@ -67,7 +70,7 @@ namespace std {
     };
     
     template <class Inner>
-    bool is_initialized(Initializable<Inner>& initializable){
+    bool is_initialized(const Initializable<Inner>& initializable){
         return std::holds_alternative<InitializableStruct<Initialized, Inner>>(initializable);
     }
 
@@ -117,7 +120,12 @@ namespace std {
 
     // Retrieves the value of the initialized variable. Throws exception if variable is unitialized
     template <class Inner>
-    Inner extract(Initializable<Inner> initialized) {
+    Inner extract(const InitializableStruct<Initialized, Inner>& initialized) {
+        return initialized.value;
+    }
+
+    template <class Inner>
+    Inner extract(const Initializable<Inner> initialized) {
         if (!std::holds_alternative<InitializableStruct<Initialized, Inner>>(initialized)){
             throw extract_uninitialized_value();
         }

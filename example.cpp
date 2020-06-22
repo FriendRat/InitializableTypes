@@ -32,7 +32,6 @@ int main(){
 	// Re-initialize, receive warning.
 	std::initialize<InnerType>(birthday_card.message, std::make_pair("Happy", "Birthday!"));
 
-	std::get_initialized(birthday_card.message) = std::make_pair("HELLO", "WORLD");
 
 	// Now the variable can be extracted
 	std::cout << std::extract(birthday_card.message).first
@@ -40,5 +39,11 @@ int main(){
 			  << std::extract(birthday_card.message).second
 			  << std::endl;
 	
+	// If already initialized, can use assignment operator on contained value
+	std::get_initialized(birthday_card.message) = std::make_pair("HELLO", "WORLD");
+	std::cout << std::extract(birthday_card.message).first
+			  << " " 
+			  << std::extract(birthday_card.message).second
+			  << std::endl;
 	return 0;
 }
