@@ -45,5 +45,8 @@ int main(){
 			  << " " 
 			  << std::extract(birthday_card.message).second
 			  << std::endl;
+	if (!!birthday_card.message) {
+		std::cout << "message has already been added" << std::endl;
+	}
 	return 0;
 }

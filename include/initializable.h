@@ -32,6 +32,7 @@ template <class Inner>
 using Initializable = std::variant<InitializableStruct<UnInitialized, Inner>, InitializableStruct<Initialized, Inner>>;
 
 
+
 /*****************************************************************
     These define traits for Initializable types to modify 
     certain behaviors
@@ -143,5 +144,9 @@ namespace std {
     }
 };
 
+template <class Inner>
+bool operator!(const Initializable<Inner> &initializable) {
+    return !std::is_initialized<Inner>(initializable);
+}
 
 #endif
