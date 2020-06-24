@@ -48,6 +48,12 @@ TEST_CASE("Test basic", "[basic]") {
 		Uint<Initialized> another_inner = std::get_initialized<unsigned>(init_uint);
 		REQUIRE(another_inner.value == 2);
 	}
+
+	SECTION("Test get_initialized + assignment"){
+		InitializableUint init_uint = Uint<Initialized>(2);
+		std::get_initialized<unsigned>(init_uint) = 1;
+		REQUIRE(std::extract<unsigned>(init_uint) == 1);
+	}
 }
 
 template <Status T>
