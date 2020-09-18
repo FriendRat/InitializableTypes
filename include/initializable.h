@@ -2,6 +2,7 @@
 #define _INITIALIZABLE_H_
 #include <variant>
 #include <optional>
+#include <iostream>
 
 /*****************************************************************
     These define the type templates for the initializable type
